@@ -1,7 +1,7 @@
 require './lib/Mailer.rb'
 require './lib/Message.rb'
-
-class WhisperSync
+require './lib/UtilityMethods.rb'
+class WhisperMailer
   include Mailer
   attr_accessor :from, :kindle_address
   def initialize(from, kindle_address)
