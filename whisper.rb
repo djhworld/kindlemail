@@ -17,6 +17,7 @@ begin
     version VERSION
     banner ban
     opt :kindle_address, "Overrides the default kindle address to send items to", :short => "-k", :type => :string
+    opt :force, "Send the file regardless of whether you have sent it before", :short => "-f", :default => nil
   end
 
   opts = Trollop::with_standard_exception_handling p do
@@ -46,7 +47,12 @@ begin
   puts "\n#{VERSION}"
   VERSION.length.times { print "-" }
   puts
-  mailer.sync(ARGV[0])
+
+  if(opts[:force_given])
+    mailer.sync(ARGV[0],true)
+  else
+    mailer.sync(ARGV[0],false)
+  end
 
 rescue ArgumentError => message
   puts "#{message}"
