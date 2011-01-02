@@ -1,10 +1,10 @@
 require 'mail'
 require 'gmail_xoauth'
 require './lib/UtilityMethods.rb'
+require './lib/constants.rb'
 module Mailer
   include UtilityMethods
   def sendMessage(message)
-    print "Creating message..."
     mail = Mail.new do
       from message.from
       to message.to
@@ -14,15 +14,12 @@ module Mailer
         add_file message.attachment
       end
     end
-    print ".created"
-    puts
     sendSMTP(mail)
   end
 
+  # Use gmail_xoauth to send email
   def sendSMTP(mail)
-    print "Loading SMTP config..."
-    config = loadConfig('conf/email_conf.yaml')
-    puts ".done"
+    config = loadConfig(EMAIL_CONF_FILE)
     
     smtp = Net::SMTP.new(config[:smtp_server], config[:smtp_port])
     smtp.enable_starttls_auto
@@ -35,7 +32,7 @@ module Mailer
     smtp.start(config[:host], config[:email], secret, :xoauth) do |session|
       print "Sending message..."
       session.send_message(mail.encoded, mail.from_addrs.first, mail.destinations)
-      puts "sent!"
+      puts ".sent!"
     end
   end
 end
