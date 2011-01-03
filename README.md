@@ -19,9 +19,41 @@ This is rough code and probably won't work.
 ## But I think it works! 
 To get it to work do the following
 
+**Create a user whisper file**
 `echo kindle_addr: your_kindle_address@kindle.com > ~/.whisper`
+
+**Go to the folder where your document lives (optional)**
 `cd my_lovely_documents_folder`
-`ls`
-`memoirs.pdf` 
-`secret_sauce.txt`
+
+**Send document to your kindle**
 `whisper memoirs.pdf`
+
+## Options
+    whisper will send items to your kindle in the simplest possible manner
+
+    Valid filetypes: -
+        .doc - Microsoft Word
+        .rtf - Rich Text Format
+        .jpeg - JPEG image file
+        .jpg - JPEG image file
+        .gif - GIF image file
+        .png - PNG image file
+        .bmp - BMP image file
+        .html - Hypertext Markup Language
+        .htm - HyperText Markup Language
+        .txt - Text files
+        .mobi - Mobile ebooks
+        .prc - Mobile ebooks
+        .pdf - Portable Document Format (experimental)
+
+    Usage: -
+        whisper [options] <filename>
+
+    Example usage: -
+        whisper my_book.mobi
+
+    Where [options] are: -
+        --kindle-address, -k <s>:   Overrides the default kindle address to send items to
+               --force, -f:   Send the file regardless of whether you have sent it before
+             --version, -v:   Print version and exit
+                --help, -h:   Show this message
