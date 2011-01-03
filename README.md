@@ -1,4 +1,3 @@
-## Introduction
 whisper is a simple way of sending personal documents to your kindle, I made this 
 simple application because I'm too lazy to faff about attaching items to emails and
 I prefer to use the CLI.
