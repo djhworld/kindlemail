@@ -20,13 +20,13 @@ This is rough code and probably won't work.
 To get it to work do the following
 
 **Create a user whisper file**
-`echo kindle_addr: your_kindle_address@kindle.com > ~/.whisper`
+    echo kindle_addr: your_kindle_address@kindle.com > ~/.whisper
 
 **Go to the folder where your document lives (optional)**
-`cd my_lovely_documents_folder`
+    cd my_lovely_documents_folder
 
 **Send document to your kindle**
-`whisper memoirs.pdf`
+    whisper memoirs.pdf
 
 ## Options
     whisper will send items to your kindle in the simplest possible manner
