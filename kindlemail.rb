@@ -1,17 +1,17 @@
 #!/usr/bin/env ruby
 require 'trollop'
 require './lib/UtilityMethods.rb'
-require './lib/WhisperMailer.rb'
+require './lib/KindleMailer.rb'
 require './lib/constants.rb'
 begin
   ban = ""
-  ban << "whisper will send items to your kindle in the simplest possible manner"
+  ban << "kindlemail will send items to your kindle in the simplest possible manner"
   ban << "\n\nValid filetypes: -"
   VALID_FILE_TYPES.each { |key,val| ban << "\n  #{key} - #{val}" }
   ban << "\n\nUsage: -"
-  ban << "\n  whisper [options] <filename>"
+  ban << "\n  kindlemail [options] <filename>"
   ban << "\n\nExample usage: -"
-  ban << "\n whisper my_book.mobi"
+  ban << "\n kindlemail my_book.mobi"
   ban << "\n\nWhere [options] are: -"
 
   p = Trollop::Parser.new do
@@ -33,17 +33,17 @@ begin
     # no -k flag specified, see if a configuration file has been set
     if(File.exist?(USER_CONF_FILE))
       config = YAML.load_file(USER_CONF_FILE).inject({}){|memo,(k,v)| memo[k.to_sym] = v; memo}
-      raise ArgumentError, "A configuration file was found in ~/.whisper but appears to be invalid" if config.key?(:kindle_addr) == false || config[:kindle_addr].nil?
+      raise ArgumentError, "A configuration file was found in ~/.kindlemail but appears to be invalid" if config.key?(:kindle_addr) == false || config[:kindle_addr].nil?
       kindle_address = config[:kindle_addr]
     else
-      raise ArgumentError, "No address has been specified to send the item to.\nEither add an address in ~/.whisper or use the -kindle_address (-k) option"
+      raise ArgumentError, "No address has been specified to send the item to.\nEither add an address in ~/.kindlemail or use the -kindle_address (-k) option"
     end
   else
     #User has specified the -k flag 
     kindle_address = opts[:kindle_address]
   end
 
-  mailer = WhisperMailer.new(kindle_address)
+  mailer = KindleMailer.new(kindle_address)
   VERSION.length.times { print "-" }
   puts "\n#{VERSION}"
   VERSION.length.times { print "-" }

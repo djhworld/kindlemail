@@ -1,5 +1,5 @@
 require './lib/constants.rb'
-class WhisperFileDatastore
+class KindleMailFileDatastore
   
   def load_store
     if(File.exist?(FILE_STORE))

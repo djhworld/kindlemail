@@ -1,9 +1,9 @@
 require './lib/Mailer.rb'
 require './lib/Message.rb'
 require './lib/UtilityMethods.rb'
-require './lib/WhisperFileDatastore.rb'
+require './lib/KindleMailFileDatastore.rb'
 require './lib/constants.rb'
-class WhisperMailer
+class KindleMailer
   include Mailer
   attr_accessor :kindle_address
   def initialize(kindle_address)
@@ -14,7 +14,7 @@ class WhisperMailer
     raise ArgumentError, "The file you have specified does not exist #{SEE_HELP}" if file.nil? || !File.exist?(file)
     raise ArgumentError, "The file you have specified is not a valid type #{SEE_HELP}" if VALID_FILE_TYPES.include?(File.extname(file)) == false
 
-    datastore = WhisperFileDatastore.new
+    datastore = KindleMailFileDatastore.new
     if(!force_send)
       if(datastore.file_exists?(@kindle_address, File.basename(file))) 
         raise ArgumentError, "This file has already been sent to #{@kindle_address}. Use the --force (-f) option if you want to resend it"

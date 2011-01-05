@@ -1,4 +1,4 @@
-whisper is a simple way of sending personal documents to your kindle, I made this 
+kindlemail is a simple way of sending personal documents to your kindle, I made this 
 simple application because I'm too lazy to faff about attaching items to emails and
 I prefer to use the CLI.
 
@@ -15,20 +15,8 @@ code style or the way the application works, fork it and change it
 ## Notice 2 
 This is rough code and probably won't work.
 
-## But I think it works! 
-To get it to work do the following
-
-**Create a user whisper file**
-    echo kindle_addr: your_kindle_address@kindle.com > ~/.whisper
-
-**Go to the folder where your document lives (optional)**
-    cd my_lovely_documents_folder
-
-**Send document to your kindle**
-    whisper memoirs.pdf
-
 ## Options
-    whisper will send items to your kindle in the simplest possible manner
+    kindlemail will send items to your kindle in the simplest possible manner
 
     Valid filetypes: -
         .doc - Microsoft Word
@@ -46,10 +34,10 @@ To get it to work do the following
         .pdf - Portable Document Format (experimental)
 
     Usage: -
-        whisper [options] <filename>
+        kindlemail [options] <filename>
 
     Example usage: -
-        whisper my_book.mobi
+        kindlemail my_book.mobi
 
     Where [options] are: -
         --kindle-address, -k <s>:   Overrides the default kindle address to send items to
