@@ -15,7 +15,7 @@ begin
   ban << "\n\nWhere [options] are: -"
 
   p = Trollop::Parser.new do
-    version VERSION
+    version VERSION_STRING
     banner ban
     opt :kindle_address, "Overrides the default kindle address to send items to", :short => "-k", :type => :string
     opt :force, "Send the file regardless of whether you have sent it before", :short => "-f", :default => nil
@@ -44,9 +44,9 @@ begin
   end
 
   mailer = KindleMailer.new(kindle_address)
-  VERSION.length.times { print "-" }
-  puts "\n#{VERSION}"
-  VERSION.length.times { print "-" }
+  VERSION_STRING.length.times { print "-" }
+  puts "\n#{VERSION_STRING}"
+  VERSION_STRING.length.times { print "-" }
   puts
 
   if(opts[:force_given])

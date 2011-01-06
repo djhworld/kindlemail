@@ -15,5 +15,7 @@ VALID_FILE_TYPES = {
 SEE_HELP = "\nUse the -h flag for usage details"
 EMAIL_CONF_FILE = File.expand_path("~/.kindlemail/.email_conf")
 USER_CONF_FILE = File.expand_path('~/.kindlemail/.kindlemail')
-VERSION = "kindlemail v0.1 (January 2011). https://github.com/djhworld/kindlemail"
+VERSION = "0.0.1"
+VERSION_STRING = "kindlemail #{VERSION} (January 2011). https://github.com/djhworld/kindlemail"
 FILE_STORE = File.expand_path("~/.kindlemail/.storage/sent_files.history")
+
