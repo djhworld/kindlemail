@@ -2,7 +2,7 @@ require 'mail'
 require 'gmail_xoauth'
 require './lib/UtilityMethods.rb'
 require './lib/constants.rb'
-module Mailer
+class Mailer
   include UtilityMethods
   def sendMessage(message)
     mail = Mail.new do
