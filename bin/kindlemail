@@ -1,6 +1,5 @@
 #!/usr/bin/env ruby
 require 'trollop'
-require './lib/UtilityMethods.rb'
 require './lib/KindleMailer.rb'
 require './lib/constants.rb'
 begin
@@ -13,6 +12,8 @@ begin
   ban << "\n\nExample usage: -"
   ban << "\n kindlemail my_book.mobi"
   ban << "\n\nWhere [options] are: -"
+
+  mailer = KindleMailer.new
 
   p = Trollop::Parser.new do
     version VERSION_STRING
@@ -33,26 +34,25 @@ begin
     # no -k flag specified, see if a configuration file has been set
     if(File.exist?(USER_CONF_FILE))
       config = YAML.load_file(USER_CONF_FILE).inject({}){|memo,(k,v)| memo[k.to_sym] = v; memo}
-      raise ArgumentError, "A configuration file was found in ~/.kindlemail but appears to be invalid" if config.key?(:kindle_addr) == false || config[:kindle_addr].nil?
+      raise ArgumentError, "The configuration file #{USER_CONF_FILE} was found but appears to be invalid/incomplete.\nThe most likely reason for this is the fact that you need to set a default kindle address to send items to.\nYou must edit the file and follow the instructions in the comments before trying again." if config.key?(:kindle_addr) == false || config[:kindle_addr].nil?
       kindle_address = config[:kindle_addr]
     else
-      raise ArgumentError, "No address has been specified to send the item to.\nEither add an address in ~/.kindlemail or use the -kindle_address (-k) option"
+      raise ArgumentError, "No address has been specified to send the item to.\nEither add an address in #{USER_CONF_FILE} or use the -kindle_address (-k) option"
     end
   else
     #User has specified the -k flag 
     kindle_address = opts[:kindle_address]
   end
 
-  mailer = KindleMailer.new(kindle_address)
   VERSION_STRING.length.times { print "-" }
   puts "\n#{VERSION_STRING}"
   VERSION_STRING.length.times { print "-" }
   puts
 
   if(opts[:force_given])
-    mailer.sync(ARGV[0],true)
+    mailer.send(kindle_address, ARGV[0],true)
   else
-    mailer.sync(ARGV[0],false)
+    mailer.send(kindle_address, ARGV[0],false)
   end
 
 rescue ArgumentError => message

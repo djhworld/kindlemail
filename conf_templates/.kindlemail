@@ -1,0 +1,7 @@
+# Put the email address of the kindle you wish to use as the default sending address
+# You can find the address of your kindle by: - 
+# Home->Settings->Device email address
+#
+# Example 
+# kindle_addr: mykindle@kindle.com
+kindle_addr: 

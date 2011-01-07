@@ -13,9 +13,11 @@ VALID_FILE_TYPES = {
 ".prc" => "Mobile ebooks",
 ".pdf" => "Portable Document Format (experimental)" }
 SEE_HELP = "\nUse the -h flag for usage details"
-EMAIL_CONF_FILE = File.expand_path("~/.kindlemail/.email_conf")
-USER_CONF_FILE = File.expand_path('~/.kindlemail/.kindlemail')
+USER_DIR = "~/.kindlemail"
+STORAGE_DIR = USER_DIR + "/.storage"
+EMAIL_CONF_FILE = File.expand_path(USER_DIR + "/.email_conf")
+USER_CONF_FILE = File.expand_path(USER_DIR + "/.kindlemail")
 VERSION = File.open('VERSION','r') do |a| a.gets end
 VERSION_STRING = "kindlemail #{VERSION} (January 2011). https://github.com/djhworld/kindlemail"
-FILE_STORE = File.expand_path("~/.kindlemail/.storage/sent_files.history")
+FILE_STORE = File.expand_path(STORAGE_DIR + "/sent_files.history")
 

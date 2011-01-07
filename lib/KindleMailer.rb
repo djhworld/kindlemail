@@ -1,15 +1,17 @@
+require 'fileutils'
+require 'yaml'
 require './lib/Mailer.rb'
 require './lib/Message.rb'
-require './lib/UtilityMethods.rb'
 require './lib/KindleMailFileDatastore.rb'
 require './lib/constants.rb'
 class KindleMailer
   attr_accessor :kindle_address
-  def initialize(kindle_address)
-    @kindle_address = kindle_address
+  def initialize
+    configuration_setup
   end
 
-  def sync(file, force_send)
+  def send(kindle_address, file, force_send)
+    @kindle_address = kindle_address
     raise ArgumentError, "The file you have specified does not exist #{SEE_HELP}" if file.nil? || !File.exist?(file)
     raise ArgumentError, "The file you have specified is not a valid type #{SEE_HELP}" if VALID_FILE_TYPES.include?(File.extname(file)) == false
 
@@ -24,10 +26,32 @@ class KindleMailer
     puts "Preparing #{File.basename(file)} to be sent to #{@kindle_address}"
 
     #send email
-    Mailer.new.sendMessage(Message.new(@kindle_address, "a@b.c", filepath))
+    raise ArgumentError, "Cannot find email credentials file #{EMAIL_CONF_FILE}." if !File.exists?(EMAIL_CONF_FILE)
+    config = YAML.load_file(EMAIL_CONF_FILE).inject({}){|memo,(k,v)| memo[k.to_sym] = v; memo}
+    mailer = Mailer.new(config)
+    mailer.sendMessage(Message.new(@kindle_address, "a@b.c", filepath))
 
     #record that message was sent
     datastore.add_entry(@kindle_address,File.basename(file))
     puts "#{File.basename(file)} was successfully sent to #{@kindle_address}"
+  end
+
+  def configuration_setup
+    dirname = File.expand_path(USER_DIR)
+    if !File.exists?(dirname)
+      Dir.mkdir(dirname) 
+      create_storage_dir
+      create_user_conf_file
+    else     
+      create_user_conf_file if !File.exists?(USER_CONF_FILE)
+      create_storage_dir if !File.exists?(File.expand_path(STORAGE_DIR))
+    end
+  end
+
+  def create_storage_dir
+    Dir.mkdir(File.expand_path(STORAGE_DIR))
+  end
+  def create_user_conf_file
+      FileUtils.cp('conf_templates/.kindlemail', USER_CONF_FILE)
   end
 end 
