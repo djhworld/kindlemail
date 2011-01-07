@@ -1,7 +1,6 @@
 require 'fileutils'
 require 'yaml'
-require './lib/Mailer.rb'
-require './lib/Message.rb'
+require './lib/GmailMailer.rb'
 require './lib/KindleMailFileDatastore.rb'
 require './lib/constants.rb'
 class KindleMailer
@@ -28,8 +27,8 @@ class KindleMailer
     #send email
     raise ArgumentError, "Cannot find email credentials file #{EMAIL_CONF_FILE}." if !File.exists?(EMAIL_CONF_FILE)
     config = YAML.load_file(EMAIL_CONF_FILE).inject({}){|memo,(k,v)| memo[k.to_sym] = v; memo}
-    mailer = Mailer.new(config)
-    mailer.sendMessage(Message.new(@kindle_address, "a@b.c", filepath))
+    mailer = GmailMailer::Mailer.new(config)
+    mailer.sendMessage(GmailMailer::Message.new(@kindle_address, "a@b.c", filepath))
 
     #record that message was sent
     datastore.add_entry(@kindle_address,File.basename(file))
