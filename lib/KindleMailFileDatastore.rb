@@ -32,4 +32,20 @@ class KindleMailFileDatastore
     file.write data
     file.close
   end
+
+  def print_history
+    load_store
+    if !@db.empty?
+      @db.each { |email, val| 
+        puts email 
+        val.each { |filename,sentdate|  print " => " + filename  + " was sent on " + sentdate.strftime("%a %d %h %H:%M:%S") + "\n" }
+      }
+    else
+      puts "There are no items in the history"
+    end
+  end
+
+  def clear_history
+    FileUtils.rm(FILE_STORE) if File.exist?(FILE_STORE)
+  end
 end
