@@ -5,5 +5,5 @@ rescue LoadError
   require 'rubygems'
   require 'kindlemail'
 end
-a = KindleMail::Application.new
-a.run
+app = KindleMail::Application.new
+app.run
