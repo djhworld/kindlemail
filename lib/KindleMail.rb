@@ -108,7 +108,7 @@ module KindleMail
           # no -k flag specified, see if a configuration file has been set
           if(File.exist?(USER_CONF_FILE))
             config = YAML.load_file(USER_CONF_FILE).inject({}){|memo,(k,v)| memo[k.to_sym] = v; memo}
-            raise ArgumentError, "The configuration file #{USER_CONF_FILE} was found but appears to be invalid/incomplete.\nThe most likely reason for this is the fact that you need to set a default kindle address to send items to.\nYou must edit the file and follow the instructions in the comments before trying again." if config.key?(:kindle_addr) == false || config[:kindle_addr].nil?
+            raise ArgumentError, "The configuration file #{USER_CONF_FILE} was found but appears to be invalid/incomplete.\nThe most likely reason for this is the fact that you need to set a default kindle address to send items to.\nYou must edit the file and follow the instructions in the comments before trying again. Alternatively use the -k flag to specify a kindle address to send the item to" if config.key?(:kindle_addr) == false || config[:kindle_addr].nil?
             kindle_address = config[:kindle_addr]
           else
             raise ArgumentError, "No address has been specified to send the item to.\nEither add an address in #{USER_CONF_FILE} or use the -kindle_address (-k) option"
