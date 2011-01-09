@@ -1,5 +1,4 @@
-require 'yaml'
-require './lib/GmailMailer.rb'
+require 'gmail-mailer'
 require './lib/constants.rb'
 class KindleMailer
   attr_accessor :kindle_address

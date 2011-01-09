@@ -1,0 +1,11 @@
+# This contains the mail credentials required to send emails using your gmail account
+# uncomment the lines below and insert your details
+#
+#smtp_server: smtp.gmail.com
+#smtp_port: 587
+#smtp_consumer_key: anonymous
+#smtp_consumer_secret: anonymous
+#smtp_oauth_token: 
+#smtp_oauth_token_secret: 
+#host: gmail.com
+#email: 
