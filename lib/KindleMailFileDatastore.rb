@@ -1,4 +1,4 @@
-require './lib/constants.rb'
+require 'constants.rb'
 class KindleMailFileDatastore
   
   def load_store

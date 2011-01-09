@@ -1,5 +1,5 @@
 require 'gmail-mailer'
-require './lib/constants.rb'
+require 'constants.rb'
 class KindleMailer
   attr_accessor :kindle_address
   attr_accessor :email_credentials
