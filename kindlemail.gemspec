@@ -29,6 +29,7 @@ Gem::Specification.new do |s|
     "bin/kindlemail",
     "conf_templates/.email_conf",
     "conf_templates/.kindlemail",
+    "kindlemail.gemspec",
     "lib/KindleMail.rb",
     "lib/KindleMailFileDatastore.rb",
     "lib/KindleMailer.rb",
