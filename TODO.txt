@@ -1,4 +1,5 @@
 Changes needed for 0.1.4
+- Update to use 0.2.0 of gmail-mailer
 - Fix "user configuration invalid" message to mention the user can use the -k flag
 - Fix issue where the -s or -d flags cannot be used without entering a filename first (bad user experience) 
 - Fix email configuration file issues?
