@@ -1,6 +1,5 @@
 require 'mail'
 require 'gmail_xoauth'
-require './lib/constants.rb'
 module GmailMailer
   class Mailer
     def initialize(credentials)
