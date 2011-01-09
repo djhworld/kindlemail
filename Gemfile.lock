@@ -1,13 +1,29 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    activesupport (3.0.3)
     git (1.2.5)
-    gmail-mailer (0.1.0)
+    gmail-mailer (0.1.1)
+      gmail_xoauth (~> 0.3.0)
+      mail (~> 2.2.13)
+    gmail_xoauth (0.3.0)
+      oauth (>= 0.3.6)
+    i18n (0.5.0)
     jeweler (1.5.2)
       bundler (~> 1.0.0)
       git (>= 1.2.5)
       rake
+    mail (2.2.14)
+      activesupport (>= 2.3.6)
+      i18n (>= 0.4.0)
+      mime-types (~> 1.16)
+      treetop (~> 1.4.8)
+    mime-types (1.16)
+    oauth (0.4.4)
+    polyglot (0.3.1)
     rake (0.8.7)
+    treetop (1.4.9)
+      polyglot (>= 0.3.1)
     trollop (1.16.2)
 
 PLATFORMS
@@ -15,6 +31,6 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 1.0.0)
-  gmail-mailer (~> 0.1.0)
+  gmail-mailer (~> 0.1.1)
   jeweler (~> 1.5.2)
   trollop (~> 1.16.2)
