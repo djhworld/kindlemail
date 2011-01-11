@@ -46,7 +46,6 @@ module KindleMail
     attr_reader :opts
     def run
       setup
-      parse
       process
     end
 
@@ -61,7 +60,7 @@ module KindleMail
       ban << "\n kindlemail my_book.mobi"
       ban << "\n\nWhere [options] are: -"
 
-      @cmd_parser = Trollop::Parser.new do
+      @opts = Trollop::options do
         version VERSION_STRING
         banner ban
         opt :kindle_address, "Overrides the default kindle address to send items to", :short => "-k", :type => :string
@@ -70,13 +69,6 @@ module KindleMail
         opt :clear_history, "Clear the history of files that have been sent using kindlemail", :short => "-d", :default => nil
       end
     end
-
-    def parse
-      @opts = Trollop::with_standard_exception_handling p do
-        o = @cmd_parser.parse ARGV 
-      end
-    end
-
 
     def process
       begin
