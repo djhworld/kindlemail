@@ -3,6 +3,10 @@ Changes needed for 0.1.4
 - Fix "user configuration invalid" message to mention the user can use the -k flag
 - Fix issue where the -s or -d flags cannot be used without entering a filename first (bad user experience) 
 - Fix email configuration file issues?
+- Look into issue with problems running on 1.8
+-- Issue with conf_templates
+-- Issue with -h flag
+- Get a virtualised ubuntu setup going to test this out
 
 Future stuff: -
 - Add flag to view default kindle address
