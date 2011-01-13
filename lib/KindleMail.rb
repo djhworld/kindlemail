@@ -1,6 +1,6 @@
 require 'trollop'
 require 'yaml'
-require 'FileUtils'
+require 'fileutils'
 require 'KindleMailer.rb'
 require 'constants.rb'
 require 'KindleMailFileDatastore.rb'
