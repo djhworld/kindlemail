@@ -28,11 +28,15 @@ module KindleMail
     end
 
     def create_user_conf_file
-      FileUtils.cp('conf_templates/.kindlemail', USER_CONF_FILE)
+      root = File.expand_path(File.dirname(__FILE__))
+      root = File.expand_path("../conf_templates", root)
+      FileUtils.cp(File.join(root, '/.kindlemail'), USER_CONF_FILE)
     end
 
     def create_user_email_conf_file
-      FileUtils.cp('conf_templates/.email_conf', EMAIL_CONF_FILE)
+      root = File.expand_path(File.dirname(__FILE__))
+      root = File.expand_path("../conf_templates", root)
+      FileUtils.cp(File.join(root, '/.email_conf'), USER_CONF_FILE)
     end
 
     def get_email_credentials
