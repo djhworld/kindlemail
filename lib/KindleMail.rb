@@ -34,14 +34,15 @@ module KindleMail
     end
 
     def create_user_email_conf_file
+      puts "Creating user email conf file"
       root = File.expand_path(File.dirname(__FILE__))
       root = File.expand_path("../conf_templates", root)
-      FileUtils.cp(File.join(root, '/.email_conf'), USER_CONF_FILE)
+      FileUtils.cp(File.join(root, '/.email_conf'), EMAIL_CONF_FILE)
     end
 
     def get_email_credentials
       raise ArgumentError, "Cannot find email credentials file #{EMAIL_CONF_FILE}." if !File.exists?(EMAIL_CONF_FILE)
-      YAML.load_file(EMAIL_CONF_FILE).inject({}){|memo,(k,v)| memo[k.to_sym] = v; memo}
+      YAML.load_file(EMAIL_CONF_FILE).inject({}){|memo,(k,v)| memo[k.to_sym] = v.to_s; memo}
     end
   end
 

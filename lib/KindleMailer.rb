@@ -15,8 +15,15 @@ class KindleMailer
 
     puts "Preparing #{File.basename(filepath)} to be sent to #{@kindle_address}"
 
-    mailer = GmailMailer::Mailer.new(@email_credentials)
-    mailer.sendMessage(GmailMailer::Message.new(@kindle_address, "a@b.c", filepath))
+    begin
+      message = GmailMailer::Message.new(@kindle_address)
+      message.add_attachment(filepath)
+      
+      mailer = GmailMailer::Mailer.new(@email_credentials)
+      mailer.send(message)
+    rescue ArgumentError => error_msg
+      raise 
+    end
 
     puts "#{File.basename(filepath)} was successfully sent to #{@kindle_address}"
     return true

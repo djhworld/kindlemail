@@ -1,5 +1,9 @@
 # kindlemail Changelog
 
+### 0.2.0
+* Changed email conf template to need less credentials
+* Updated to use gmail-mailer version 0.4.2
+
 ### 0.1.5
 * Reconfigured bin/ file to work properly with require_relative
 * Changed lib/KindleMail.rb to use relative filepaths
