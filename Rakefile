@@ -24,4 +24,11 @@ Jeweler::Tasks.new do |gem|
   gem.add_dependency "trollop", "~> 1.16.2"
 end
 Jeweler::RubygemsDotOrgTasks.new
+require 'rake/testtask'
+Rake::TestTask.new(:test) do |test|
+  test.libs << 'lib' << 'test'
+  test.pattern = 'test/**/test_*.rb'
+  test.verbose = true
+end
 
+task :default => :test

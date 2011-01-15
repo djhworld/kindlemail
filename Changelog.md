@@ -1,5 +1,9 @@
 # kindlemail Changelog
 
+### 0.2.2
+* Added some further validations on the KindleMailer class
+* Unit testing 
+
 ### 0.2.1
 * Fixed bug where you needed a file name for the -s and -d flags
 * Changed output of show_history
