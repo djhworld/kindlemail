@@ -1,16 +1,12 @@
 Changes needed for 0.1.4
-- Update to use 0.2.0 of gmail-mailer
 - Fix "user configuration invalid" message to mention the user can use the -k flag
 - Fix issue where the -s or -d flags cannot be used without entering a filename first (bad user experience) 
 - Fix email configuration file issues?
-- Look into issue with problems running on 1.8
--- Issue with conf_templates
--- Issue with -h flag
-- Get a virtualised ubuntu setup going to test this out
 
 Future stuff: -
 - Add flag to view default kindle address
 - Add ability to use multiple kindle addresses?
 - Add ability to add multiple attachments?
+- Add ability to pass in a web URL point to a file
 - Add NOTICE regarding 3G usage (users will have to pay to use the Personal Docs Service)
 - Add ability for user to create .email_conf file and generate the values
