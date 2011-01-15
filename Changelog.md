@@ -1,5 +1,11 @@
 # kindlemail Changelog
 
+### 0.2.4
+* Reconfigured KindleMail CLI to be more streamlined 
+* Added option to view default kindle address
+* Added -i option
+* Reconfigured configuration class for loading conf files
+
 ### 0.2.3
 * Added some further validations on the KindleMailer class
 * Restructured validations
