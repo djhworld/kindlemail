@@ -78,14 +78,10 @@ module KindleMail
     def process
       begin
         puts "\n#{VERSION_STRING}\n\n"
-        if ARGV.empty?
-          raise ArgumentError, "Please specify a file to send (or use the -h option to see help)" 
-        end
+
+        datastore = KindleMailFileDatastore.new
         config_manager = KindleMail::Configuration.new
         config_manager.configuration_setup
-
-        mailer = KindleMailer.new(config_manager.get_email_credentials)
-        datastore = KindleMailFileDatastore.new
 
         if(@opts[:show_history_given])
           datastore.print_history
@@ -93,12 +89,31 @@ module KindleMail
         end
 
         if(@opts[:clear_history_given])
-          print "Clearing file history"
-          datastore.clear_history
-          puts "...done"
+          do_it = false
+          if(!@opts[:force_given])      
+             print "Are you sure you wish to clear the history of files you have sent using kindlemail? [y/n]> "
+             response = gets.to_s.chomp
+             if(response.empty? or response.downcase.eql?("y") or response.downcase.eql?("yes"))
+               do_it = true
+             end
+          else
+            do_it = true
+          end
+
+          if(do_it)
+            print "Clearing file history"
+            datastore.clear_history
+            puts "...done"
+          end
           exit
         end
 
+        if ARGV.empty?
+          raise ArgumentError, "Please specify a file to send (or use the -h option to see help)" 
+        end
+
+        mailer = KindleMailer.new(config_manager.get_email_credentials)
+        
         kindle_address = ""
 
         if(!@opts[:kindle_address_given])

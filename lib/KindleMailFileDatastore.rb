@@ -35,10 +35,13 @@ class KindleMailFileDatastore
 
   def print_history
     load_store
+    puts "*** History of files sent using kindlemail (use the -d option to clear the history) ***\n\n"
     if !@db.empty?
       @db.each { |email, val| 
         puts email 
+        puts "-"*100
         val.each { |filename,sentdate|  print " => " + filename  + " was sent on " + sentdate.strftime("%a %d %h %H:%M:%S") + "\n" }
+        puts "-"*100
       }
     else
       puts "There are no items in the history"

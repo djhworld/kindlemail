@@ -1,5 +1,9 @@
 # kindlemail Changelog
 
+### 0.2.1
+* Fixed bug where you needed a file name for the -s and -d flags
+* Changed output of show_history
+
 ### 0.2.0
 * Changed email conf template to need less credentials
 * Updated to use gmail-mailer version 0.4.2
