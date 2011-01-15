@@ -1,7 +1,8 @@
 # kindlemail Changelog
 
-### 0.2.2
+### 0.2.3
 * Added some further validations on the KindleMailer class
+* Restructured validations
 * Unit testing 
 
 ### 0.2.1
