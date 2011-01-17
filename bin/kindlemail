@@ -1,4 +1,8 @@
 #!/usr/bin/env ruby
-require_relative '../lib/KindleMail.rb'
+begin
+  require_relative '../lib/KindleMail.rb'
+rescue
+  require File.expand_path(File.join(File.dirname(__FILE__), "../lib", "KindleMail.rb"))
+end
 app = KindleMail::Application.new
 app.run

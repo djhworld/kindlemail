@@ -193,7 +193,7 @@ module KindleMail
       puts "If you hate this application, supress your hatred and tell me what" 
       puts "you hate about it so I can change it"
       puts 
-      puts "Version:                #{VERSION}"
+      puts "Version:                #{APP_VERSION}"
       puts "Homepage:               #{HOMEPAGE}" 
       puts "Author:                 #{AUTHOR}"
       puts 

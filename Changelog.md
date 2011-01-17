@@ -1,7 +1,7 @@
 # kindlemail Changelog
 
 ### 0.2.5
-* Upgrading to use gmail-mailer 0.4.4
+* Upgrading to use gmail-mailer 0.4.5
 
 ### 0.2.4
 * Reconfigured KindleMail CLI to be more streamlined 
