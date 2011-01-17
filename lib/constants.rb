@@ -15,6 +15,7 @@ VALID_FILE_TYPES = {
 SEE_HELP = "\nUse the -h flag for usage details"
 USER_DIR = "~/.kindlemail"
 STORAGE_DIR = USER_DIR + "/.storage"
+STAGING_DIR = USER_DIR + "/.staging"
 EMAIL_CONF_FILE = File.expand_path(USER_DIR + "/.email_conf")
 USER_CONF_FILE = File.expand_path(USER_DIR + "/.kindlemail")
 
@@ -27,4 +28,5 @@ HOMEPAGE = "https://github.com/djhworld/kindlemail"
 AUTHOR = "djhworld"
 VERSION_STRING = "kindlemail #{APP_VERSION}. Written by #{AUTHOR}. #{HOMEPAGE}"
 FILE_STORE = File.expand_path(STORAGE_DIR + "/sent_files.history")
+
 

@@ -18,17 +18,23 @@ module KindleMail
       if !File.exists?(dirname)
         Dir.mkdir(dirname) 
         create_storage_dir
+        create_staging_dir
         create_user_conf_file
         create_user_email_conf_file
       else     
         create_user_conf_file if !File.exists?(USER_CONF_FILE)
         create_storage_dir if !File.exists?(File.expand_path(STORAGE_DIR))
+        create_staging_dir if !File.exists?(File.expand_path(STAGING_DIR))
         create_user_email_conf_file if !File.exists?(EMAIL_CONF_FILE)
       end
     end
 
     def create_storage_dir
       Dir.mkdir(File.expand_path(STORAGE_DIR))
+    end
+
+    def create_staging_dir
+      Dir.mkdir(File.expand_path(STAGING_DIR))
     end
 
     def create_user_conf_file
