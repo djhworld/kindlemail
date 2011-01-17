@@ -12,7 +12,7 @@ class TestKindleMailer < Test::Unit::TestCase
   end
 
   def test_send_with_nil_kindle_address
-    assert_raise(ArgumentError) { @mailer.send(nil, "file") }
+    assert_raise(ArgumentError) { @mailer.send(nil, "file.txt") }
   end
 
   def test_validate_kindle_address_with_nil_addr
