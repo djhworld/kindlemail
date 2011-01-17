@@ -3,7 +3,7 @@ simple application because I'm too lazy to faff about attaching items to emails 
 I prefer to use the CLI.
 
 ## Information
-This will only work with Ruby 1.9 or greater (it has been tested on 1.9.2 specifically)
+This has been tested on ruby 1.9.2 and has had cursory testing on 1.8.7
 
 ## Notice
 **DISCLAIMER** Users of the 3G Kindle will get charged fees for using the personal-document service so please
