@@ -20,12 +20,13 @@ For kindlemail to work you will need three things
 ## How do I get OAUTH credentials for my gmail account?
 
 * You will need python installed on your system
-* Follow the instructions located here http://code.google.com/p/google-mail-xoauth-tools/wiki/XoauthDotPyRunThrough
+* Follow the instructions from google [located here](http://code.google.com/p/google-mail-xoauth-tools/wiki/XoauthDotPyRunThrough)
 
 ## Why OAUTH, why can't I just put my password in?
+
 * I don't like the idea of storing passwords, sorry!
 
-### How to run
+## How to run
 If you want to run kindlemail, do the following 
 
 If you want the bleeding edge, clone this repository and...
