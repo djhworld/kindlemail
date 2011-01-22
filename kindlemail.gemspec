@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{kindlemail}
-  s.version = "0.2.7"
+  s.version = "0.2.8"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Daniel Harper"]
-  s.date = %q{2011-01-17}
+  s.date = %q{2011-01-22}
   s.default_executable = %q{kindlemail}
   s.description = %q{Sends documents to a designated kindle address painlessly and via the CLI. No need to fumble around with clumsy attachment boxes so forth, just whack in the documents you want to send and hit enter}
   s.email = %q{djharperuk@gmail.com}
@@ -32,6 +32,7 @@ Gem::Specification.new do |s|
     "conf_templates/.email_conf",
     "conf_templates/.kindlemail",
     "kindlemail.gemspec",
+    "lib/Configuration.rb",
     "lib/KindleMail.rb",
     "lib/KindleMailFileDatastore.rb",
     "lib/KindleMailer.rb",
