@@ -17,6 +17,14 @@ For kindlemail to work you will need three things
 * Anonymous OAUTH access to your gmail account 
 * Your gmail address will need to be added to the "Your Kindle Approved E-mail List" on Amazon's "Manage Your Kindle" page
 
+## How do I get OAUTH credentials for my gmail account?
+
+* You will need python installed on your system
+* Follow the instructions located here http://code.google.com/p/google-mail-xoauth-tools/wiki/XoauthDotPyRunThrough
+
+## Why OAUTH, why can't I just put my password in?
+* I don't like the idea of storing passwords, sorry!
+
 ### How to run
 If you want to run kindlemail, do the following 
 
@@ -25,14 +33,8 @@ If you want the bleeding edge, clone this repository and...
 or if you want a released gem...
     gem install kindlemail 
 
-Run kindlemail to see if it's installed correctly
-    kindlemail -i
-
-Modify the file and follow the instructions in the comments to add your gmail credentials
-    vim ~/.kindlemail/.email_conf
-
-Modify the file and follow the instructions to add your kindle address
-    vim ~/.kindlemail/.kindlemail
+Run `setup` to setup kindlemail with your gmail credentials
+    kindlemail --setup
 
 Send a file to your Kindle!
     kindlemail ~/books/my_book.mobi
@@ -48,7 +50,7 @@ This is rough code and probably won't work.
 
 ## Options
 
-    kindlemail 0.2.5. Written by djhworld. https://github.com/djhworld/kindlemail
+    kindlemail 0.2.8. Written by djhworld. https://github.com/djhworld/kindlemail
 
     kindlemail will send items to your kindle in the simplest possible manner
 
@@ -78,7 +80,7 @@ This is rough code and probably won't work.
                    --force, -f:   Send the file regardless of whether you have sent it before
             --show-history, -s:   Show the history of files that have been sent using kindlemail
            --clear-history, -d:   Clear the history of files that have been sent using kindlemail
+                   --setup, -e:   Setup kindlemail
                --show-info, -i:   Show information about the way kindlemail is setup
                  --version, -v:   Print version and exit
                     --help, -h:   Show this message
-

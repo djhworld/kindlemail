@@ -33,7 +33,9 @@ class KindleMailer
     rescue 
       raise 
     ensure
-      FileUtils.rm(filepath) if(File.extname(filepath).eql?(".mobi"))
+      if(!filepath.nil? and File.exist?(filepath))
+         FileUtils.rm(filepath) if(File.extname(filepath).eql?(".mobi"))
+      end
     end
 
     puts "#{File.basename(file)} was successfully sent to #{@kindle_address}"

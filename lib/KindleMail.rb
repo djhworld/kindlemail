@@ -1,79 +1,10 @@
 require 'trollop'
-require 'yaml'
-require 'fileutils'
 require 'KindleMailer.rb'
 require 'constants.rb'
 require 'KindleMailFileDatastore.rb'
-
+require 'Configuration.rb'
 # This contains all the code needed to run the CLI application
 module KindleMail
-  class Configuration
-
-    def load_yaml(file)
-      YAML.load_file(file).inject({}){|memo,(k,v)| memo[k.to_sym] = v.to_s; memo}
-    end
-    # Create the user framework needed to run the application
-    def configuration_setup
-      dirname = File.expand_path(USER_DIR)
-      if !File.exists?(dirname)
-        Dir.mkdir(dirname) 
-        create_storage_dir
-        create_staging_dir
-        create_user_conf_file
-        create_user_email_conf_file
-      else     
-        create_user_conf_file if !File.exists?(USER_CONF_FILE)
-        create_storage_dir if !File.exists?(File.expand_path(STORAGE_DIR))
-        create_staging_dir if !File.exists?(File.expand_path(STAGING_DIR))
-        create_user_email_conf_file if !File.exists?(EMAIL_CONF_FILE)
-      end
-    end
-
-    def create_storage_dir
-      Dir.mkdir(File.expand_path(STORAGE_DIR))
-    end
-
-    def create_staging_dir
-      Dir.mkdir(File.expand_path(STAGING_DIR))
-    end
-
-    def create_user_conf_file
-      root = File.expand_path(File.dirname(__FILE__))
-      root = File.expand_path("../conf_templates", root)
-      FileUtils.cp(File.join(root, '/.kindlemail'), USER_CONF_FILE)
-    end
-
-    def create_user_email_conf_file
-      puts "Creating user email conf file"
-      root = File.expand_path(File.dirname(__FILE__))
-      root = File.expand_path("../conf_templates", root)
-      FileUtils.cp(File.join(root, '/.email_conf'), EMAIL_CONF_FILE)
-    end
-
-    def get_email_credentials
-      raise ArgumentError, "Cannot find email credentials file #{EMAIL_CONF_FILE}." if !File.exists?(EMAIL_CONF_FILE)
-      begin
-        load_yaml(EMAIL_CONF_FILE)
-      rescue
-        raise StandardError, "Error parsing #{EMAIL_CONF_FILE}"
-      end
-    end
-
-    def get_user_credentials
-      error_msg =  "The configuration file #{USER_CONF_FILE} was found but appears to be invalid/incomplete.\nThe most likely reason for this is the fact that you need to set a default kindle address to send items to.\nYou must edit the file and follow the instructions in the comments before trying again. Alternatively use the -k flag to specify a kindle address to send the item to" 
-
-      raise ArgumentError, "Cannot find user credentials file #{USER_CONF_FILE}." if !File.exists?(USER_CONF_FILE)
-      begin
-        config = load_yaml(USER_CONF_FILE)
-      rescue
-       raise StandardError, error_msg
-      end
-
-      raise StandardError, error_msg if config.key?(:kindle_addr) == false || config[:kindle_addr].nil?
-      return config
-    end
-  end
-
   class Application
     attr_reader :cmd_parser
     attr_reader :opts
@@ -81,7 +12,7 @@ module KindleMail
     def initialize
       puts "#{VERSION_STRING}\n\n"
       @datastore = KindleMailFileDatastore.new
-      @config_manager = KindleMail::Configuration.new
+      @config_manager = Configuration.new
       @config_manager.configuration_setup
     end
 
@@ -108,12 +39,40 @@ module KindleMail
         opt :force, "Send the file regardless of whether you have sent it before", :short => "-f", :default => nil
         opt :show_history, "Show the history of files that have been sent using kindlemail", :short => "-s", :default => nil
         opt :clear_history, "Clear the history of files that have been sent using kindlemail", :short => "-d", :default => nil
+        opt :setup, "Setup kindlemail", :default => nil
         opt :show_info, "Show information about the way kindlemail is setup", :short => "-i", :default => nil
       end
     end
 
     def process
       begin
+
+        if(@opts[:setup_given])
+          hyphens = "-"*79
+          puts hyphens
+          puts "kindlemail setup"
+          puts "This will overwrite any settings you have set previously"
+          puts hyphens
+          print "Kindle address to set as your default address> "
+          @config_manager.set_default_kindle_address(gets.chomp.to_s) 
+
+          puts 
+          puts hyphens
+          puts "Gmail Authentication Settings"
+          puts "To get a valid anonymous token, use the instructions located here\nhttp://code.google.com/p/google-mail-xoauth-tools/wiki/XoauthDotPyRunThrough"
+          puts hyphens
+          print "OAUTH Token> "
+          token = gets.chomp.to_s
+          print "OAUTH Token Secret> "
+          token_secret = gets.chomp.to_s
+          print "Your gmail address> "
+          email = gets.chomp.to_s
+
+          @config_manager.set_email_credentials(token, token_secret, email)
+          puts "\n\nkindlemail setup complete"
+          exit
+        end
+
         if(@opts[:show_info_given])
           print_info
           exit
@@ -182,6 +141,7 @@ module KindleMail
         puts "Error occured: - \n#{message}"
       end
     end
+
     def print_info
       puts "kindlemail was born out of my own laziness. To put things bluntly" 
       puts "I'm too lazy to pick up my beloved Kindle, get a usb cable, plug"

@@ -1,5 +1,9 @@
 # kindlemail Changelog
 
+### 0.2.8
+* Added setup feature to setup the application
+* Moved configuration to a new file
+
 ### 0.2.5
 * Upgrading to use gmail-mailer 0.4.5
 

@@ -38,15 +38,34 @@ class Configuration
   end
 
   def create_user_email_conf_file
-    puts "Creating user email conf file"
     root = File.expand_path(File.dirname(__FILE__))
     root = File.expand_path("../conf_templates", root)
     FileUtils.cp(File.join(root, '/.email_conf'), EMAIL_CONF_FILE)
   end
 
   def set_default_kindle_address(address)
-    puts address
+    raise ArgumentError, "Error: No email address entered" if address.nil? or address.empty?
+
+    print "Setting up kindle credentials..."
+    File.open(USER_CONF_FILE,"w") do |file|
+      file.puts "kindle_addr: #{address}"
+    end
+    puts "Complete!"
   end
+
+  def set_email_credentials(token, token_secret, email)
+    raise ArgumentError, "Error: Please provide a valid OAUTH token" if token.nil? or token.empty?
+    raise ArgumentError, "Error, Please provide a valid OAUTH token secret"  if token_secret.nil? or token.empty?
+    raise ArgumentError, "Error: Please provide a valid gmail address" if email.nil? or email.empty?
+    print "Setting up email credentials..."
+    File.open(EMAIL_CONF_FILE, "w") do |file|
+      file.puts "smtp_oauth_token: #{token}"
+      file.puts "smtp_oauth_token_secret: #{token_secret}"
+      file.puts "email #{email}"
+    end
+    puts "Complete!"
+  end
+
 
   def get_email_credentials
     raise ArgumentError, "Cannot find email credentials file #{EMAIL_CONF_FILE}." if !File.exists?(EMAIL_CONF_FILE)
